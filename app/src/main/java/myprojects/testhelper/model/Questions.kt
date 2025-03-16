@@ -1,3 +1,10 @@
 package myprojects.testhelper.model
 
-data class Questions()
+data class Questions(
+    val testId: String,
+    val question: String,
+    val option1: String,
+    val option2: String,
+    val option3: String,
+    val option4: String
+)

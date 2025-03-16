@@ -1,0 +1,15 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.TestHelper" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <item name="colorPrimary">@color/my_light_blue</item>
+        <item name="colorPrimaryVariant">#4D4DDD</item>
+        <item name="colorOnPrimary">@android:color/white</item>
+
+        <!-- Status bar color -->
+        <item name="android:statusBarColor">@color/my_dark_blue</item>
+        <!-- App bar color -->
+    </style>
+
+    <style name="Theme.TestHelper" parent="Base.Theme.TestHelper" />
+</resources>

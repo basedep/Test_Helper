@@ -9,10 +9,24 @@
         android:id="@+id/groupsFragment"
         android:name="myprojects.testhelper.ui.fragments.GroupsFragment"
         android:label="fragment_groups"
-        tools:layout="@layout/fragment_groups" />
+        tools:layout="@layout/fragment_groups" >
+        <action
+            android:id="@+id/action_groupsFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
     <fragment
         android:id="@+id/testsFragment"
         android:name="myprojects.testhelper.ui.fragments.TestsFragment"
         android:label="fragment_tests"
         tools:layout="@layout/fragment_tests" />
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="myprojects.testhelper.ui.fragments.LoginFragment"
+        android:label="LoginFragment"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_groupsFragment"
+            app:destination="@id/groupsFragment" />
+    </fragment>
 </navigation>

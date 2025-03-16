@@ -11,6 +11,7 @@ import myprojects.testhelper.R
 class TestsFragment : BaseFragment() {
 
     override var bottomNavigationVisibility: Int = View.VISIBLE
+    override var toolbarVisibility: Int = View.VISIBLE
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

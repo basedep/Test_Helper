@@ -18,7 +18,11 @@
         android:id="@+id/testsFragment"
         android:name="myprojects.testhelper.ui.fragments.TestsFragment"
         android:label="fragment_tests"
-        tools:layout="@layout/fragment_tests" />
+        tools:layout="@layout/fragment_tests" >
+        <action
+            android:id="@+id/action_testsFragment_to_testMakerFragment"
+            app:destination="@id/testMakerFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/loginFragment"
@@ -28,5 +32,14 @@
         <action
             android:id="@+id/action_loginFragment_to_groupsFragment"
             app:destination="@id/groupsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/testMakerFragment"
+        android:name="myprojects.testhelper.ui.fragments.TestMakerFragment"
+        android:label="fragment_test_maker"
+        tools:layout="@layout/fragment_test_maker" >
+        <action
+            android:id="@+id/action_testMakerFragment_to_testsFragment"
+            app:destination="@id/testsFragment" />
     </fragment>
 </navigation>

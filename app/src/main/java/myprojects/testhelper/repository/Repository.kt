@@ -5,8 +5,12 @@ import io.appwrite.models.Document
 import io.appwrite.models.Session
 import myprojects.testhelper.database.remote.Appwrite
 import myprojects.testhelper.database.remote.AppwriteAPI
+import myprojects.testhelper.model.Questions
+import myprojects.testhelper.model.Tests
 import myprojects.testhelper.utils.Constants.COLLECTION_GROUPS
+import myprojects.testhelper.utils.Constants.COLLECTION_QUESTIONS
 import myprojects.testhelper.utils.Constants.COLLECTION_STUDENTS
+import myprojects.testhelper.utils.Constants.COLLECTION_TESTS
 import myprojects.testhelper.utils.Constants.DATABASE_ID
 
 class Repository : AppwriteAPI {
@@ -39,6 +43,35 @@ class Repository : AppwriteAPI {
     override suspend fun getAllGroupsUsers(ids: List<String>): List<Document<Map<String, Any>>> {
         return appwriteDatabase.listDocuments(DATABASE_ID, COLLECTION_STUDENTS,
             queries = listOf(Query.equal( "id", ids))).documents
+    }
+
+    override suspend fun uploadTest(test: Tests, questions: List<Questions>){
+        appwriteDatabase.createDocument(DATABASE_ID, COLLECTION_TESTS, test.id, test)
+
+        for(question in questions)
+            appwriteDatabase.createDocument(DATABASE_ID, COLLECTION_QUESTIONS, question.id, question)
+    }
+
+    override suspend fun getAllCreatedTestByAuthor(author: String): List<Document<Map<String, Any>>> {
+        return  appwriteDatabase.listDocuments(DATABASE_ID, COLLECTION_TESTS,
+            queries = listOf(Query.equal("author", author))).documents
+    }
+
+    override suspend fun requireQuestionsById(ids: List<String>): List<Document<Map<String, Any>>> {
+        return  appwriteDatabase.listDocuments(DATABASE_ID, COLLECTION_QUESTIONS,
+            queries = listOf(Query.equal("id", ids))).documents
+    }
+
+    override suspend fun updateTest(test: Tests, questions: List<Questions>) {
+        appwriteDatabase.updateDocument(DATABASE_ID, COLLECTION_TESTS, test.id, test)
+
+        for(question in questions)
+            appwriteDatabase.updateDocument(DATABASE_ID, COLLECTION_QUESTIONS, question.id, question)
+    }
+
+    suspend fun addQuestions(questions: List<Questions>){
+        for(question in questions)
+            appwriteDatabase.createDocument(DATABASE_ID, COLLECTION_QUESTIONS, question.id, question)
     }
 
 }

@@ -1,10 +1,10 @@
 package myprojects.testhelper.model
 
 data class Questions(
-    val testId: String,
-    val question: String,
-    val option1: String,
-    val option2: String,
-    val option3: String,
-    val option4: String
+    val id: String,
+    var question: String,
+    var option1: String,
+    var option2: String,
+    var option3: String,
+    var option4: String
 )

@@ -92,5 +92,17 @@
 
         </LinearLayout>
 
+        <EditText
+            android:id="@+id/answer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:hint="Ответ"
+            android:textSize="14sp"
+            android:padding="12dp"
+            android:inputType="text"
+            android:importantForAccessibility="yes"
+            android:minHeight="48dp" />
+
     </LinearLayout>
 </androidx.cardview.widget.CardView>

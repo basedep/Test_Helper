@@ -80,7 +80,8 @@ class TestMakerFragment : BaseFragment() {
                 option1 = "",
                 option2 = "",
                 option3 = "",
-                option4 = ""
+                option4 = "",
+                answer = ""
             )
             questionsAdapter?.addQuestion(newQuestion)
         }

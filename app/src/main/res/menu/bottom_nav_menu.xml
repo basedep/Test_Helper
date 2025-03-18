@@ -11,4 +11,14 @@
         android:id="@+id/testsFragment"
         android:title="Тесты"
         android:icon="@drawable/baseline_text_snippet_24"/>
+
+    <item
+        android:id="@+id/availableTestsFragment"
+        android:title="Мои тесты"
+        android:icon="@drawable/baseline_text_snippet_24"/>
+
+    <item
+        android:id="@+id/passedTestsFragment"
+        android:title="Завершенные тесты"
+        android:icon="@drawable/baseline_done_24"/>
 </menu>

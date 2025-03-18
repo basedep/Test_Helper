@@ -7,6 +7,7 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -19,6 +20,7 @@ class MainActivity : AppCompatActivity() {
     private var bottomNavigationView: BottomNavigationView? = null
     private var toolbar: Toolbar? = null
     private var viewModel: MyViewModel? = null
+    private var navigationController: NavController? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,9 +30,12 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         viewModel = ViewModelProvider(this)[MyViewModel::class.java]
         bottomNavigationView = findViewById(R.id.bottomNavigationView)
-        val navigationController = findNavController(R.id.fragmentContainerView)
-        bottomNavigationView?.setupWithNavController(navigationController)
+        navigationController = findNavController(R.id.fragmentContainerView)
+        bottomNavigationView?.setupWithNavController(navigationController!!)
 
+        val typeOfUser =  SessionUtil(this).getPreference("userName")
+
+        setBottomNavItemsVisibility(typeOfUser)
 
     }
 
@@ -55,6 +60,23 @@ class MainActivity : AppCompatActivity() {
        }
 
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun setBottomNavItemsVisibility(typeOfUser:   String) {
+        val menu = bottomNavigationView?.menu
+
+        when (typeOfUser) {
+            "Хрипунов Н. В." -> {
+                menu?.findItem(R.id.availableTestsFragment)?.isVisible = false
+                menu?.findItem(R.id.passedTestsFragment)?.isVisible = false
+                navigationController?.navigate(R.id.groupsFragment)
+            }
+            else -> {
+                menu?.findItem(R.id.groupsFragment)?.isVisible = false
+                menu?.findItem(R.id.testsFragment)?.isVisible = false
+                navigationController?.navigate(R.id.availableTestsFragment)
+            }
+        }
     }
 
     fun setVisibilityForBottomNavigationView(visibility: Int){

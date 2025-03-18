@@ -7,4 +7,9 @@
     <color name="my_dark_blue">#FF4D4DDD</color>  <!-- Темно-голубой -->
 
     <color name="my_red">#F16055</color>
+
+    <color name="defaultButtonColor">#FFFFFF</color> <!-- Цвет по умолчанию -->
+    <color name="selectedButtonColor">#ADD8E6</color> <!-- Цвет для выделенной кнопки -->
+
+
 </resources>

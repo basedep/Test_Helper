@@ -18,6 +18,7 @@ class QuestionsAdapter(private var questions: MutableList<Questions>) : Recycler
         val option2EditText: EditText = itemView.findViewById(R.id.option2EditText)
         val option3EditText: EditText = itemView.findViewById(R.id.option3EditText)
         val option4EditText: EditText = itemView.findViewById(R.id.option4EditText)
+        val answerEditText: EditText = itemView.findViewById(R.id.answer)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): QuestionViewHolder {
@@ -32,6 +33,7 @@ class QuestionsAdapter(private var questions: MutableList<Questions>) : Recycler
         holder.option2EditText.setText(question.option2)
         holder.option3EditText.setText(question.option3)
         holder.option4EditText.setText(question.option4)
+        holder.answerEditText.setText(question.answer)
 
         holder.questionEditText.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
@@ -73,6 +75,13 @@ class QuestionsAdapter(private var questions: MutableList<Questions>) : Recycler
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
         })
 
+        holder.answerEditText.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                question.answer = s.toString()
+            }
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+        })
     }
 
     override fun getItemCount(): Int = questions.size

@@ -42,4 +42,31 @@
             android:id="@+id/action_testMakerFragment_to_testsFragment"
             app:destination="@id/testsFragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/availableTestsFragment"
+        android:name="myprojects.testhelper.ui.fragments.AvailableFragment"
+        android:label="fragment_available"
+        tools:layout="@layout/fragment_available" >
+        <action
+            android:id="@+id/action_availableFragment_to_startedTestFragment"
+            app:destination="@id/startedTestFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/passedTestsFragment"
+        android:name="myprojects.testhelper.ui.fragments.PassedTestsFragment"
+        android:label="fragment_passed_tests"
+        tools:layout="@layout/fragment_passed_tests" />
+
+    <fragment
+        android:id="@+id/startedTestFragment"
+        android:name="myprojects.testhelper.ui.fragments.StartedTestFragment"
+        android:label="fragment_strated_test"
+        tools:layout="@layout/fragment_strated_test" >
+        <action
+            android:id="@+id/action_startedTestFragment_to_availableTestsFragment"
+            app:destination="@id/availableTestsFragment" />
+    </fragment>
+
 </navigation>

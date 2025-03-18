@@ -1,3 +1,4 @@
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +11,8 @@ import myprojects.testhelper.model.Tests
 class TestAdapter(
     private var tests: List<Tests>,
     private val onEditClick: (Tests) -> Unit,
-    private val onDeleteClick: (Tests) -> Unit
+    private val onDeleteClick: (Tests) -> Unit,
+    private val onLongPress: (Tests) -> Unit
 ) : RecyclerView.Adapter<TestAdapter.TestViewHolder>() {
 
     inner class TestViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -28,7 +30,13 @@ class TestAdapter(
             deleteButton.setOnClickListener {
                 onDeleteClick(test)
             }
+            itemView.setOnLongClickListener {
+                onLongPress(test)
+                true
+            }
+
         }
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TestViewHolder {
@@ -38,6 +46,7 @@ class TestAdapter(
 
     override fun onBindViewHolder(holder: TestViewHolder, position: Int) {
         holder.bind(tests[position])
+
     }
 
     override fun getItemCount(): Int {

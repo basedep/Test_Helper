@@ -1,9 +1,9 @@
 package myprojects.testhelper.ui.fragments
 
 import TestAdapter
+import android.app.AlertDialog
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -54,12 +54,24 @@ class TestsFragment : BaseFragment() {
                 findNavController().navigate(R.id.action_testsFragment_to_testMakerFragment, bundle)
             },
             onDeleteClick = { test ->
-                Toast.makeText(requireContext(), "Delete", Toast.LENGTH_SHORT).show()
+                viewModel?.deleteTest(test, test.questionsIds)
+                Toast.makeText(requireContext(), "Тест удален", Toast.LENGTH_SHORT).show()
+            },
+
+            onLongPress = { test ->
+               showGroupSelectionDialog(test)
             }
         )
 
         recyclerTests?.adapter = testsAdapter
         return view
+    }
+
+
+    override fun onResume() {
+        super.onResume()
+
+        viewModel?.getAllGroups()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -73,6 +85,31 @@ class TestsFragment : BaseFragment() {
             testsAdapter.updateTests(it)
         }
 
+    }
+
+    private fun showGroupSelectionDialog(test: Tests) {
+
+        val groups = viewModel?.groups?.value
+        val groupNames = groups?.map { it.title }?.toTypedArray()
+
+        AlertDialog.Builder(requireContext())
+            .setTitle("Выберите группу")
+            .setItems(groupNames) { _, which ->
+
+                val selectedGroup = groups?.get(which)
+                val updatedStudents = selectedGroup?.students?.map { student ->
+
+                    val updatedAvailableTests = student.availableTests.toMutableList()
+                    updatedAvailableTests.add(test.id)
+                    student.copy(availableTests = updatedAvailableTests)
+                }
+
+                viewModel?.designateTestForGroup(updatedStudents!!)
+                Toast.makeText(requireContext(), "Тест назначен для группы ${groupNames?.get(which)}", Toast.LENGTH_SHORT).show()
+
+            }
+            .setNegativeButton("Отмена") { dialog, _ -> dialog.dismiss() }
+            .show()
     }
 
 }
